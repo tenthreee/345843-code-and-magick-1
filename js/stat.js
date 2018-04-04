@@ -13,9 +13,8 @@ var getMaxElem = function (elems) {
   var maxElem = elems[0];
 
   for (var i = 1; i < elems.length; i++) {
-    var elem = elems[i];
-    if (elem > maxElem) {
-      maxElem = elem;
+    if (elems[i] > maxElem) {
+      maxElem = elems[i];
     }
   }
   return maxElem;
@@ -24,13 +23,13 @@ var getMaxElem = function (elems) {
 
 // Функция поиска случайного числа
 var getRandomNumber = function (min, max) {
-  return (Math.random() * (max - min) + min).toFixed(1);
+  return (Math.random() * (max - min) + min);
 };
 
 
 // Функция рандомизации цвета
 var getRandomColor = function (min, max) {
-  return 'rgba(0, 0, 255, ' + getRandomNumber(min, max) + ')';
+  return 'rgba(0, 0, 255, ' + getRandomNumber(min, max).toFixed(1) + ')';
 };
 
 
