@@ -53,11 +53,14 @@ var FIREBALL_COLORS = [
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 var setupSimilarList = document.querySelector('.setup-similar-list');
+var setupSimilar = document.querySelector('.setup-similar');
+
 
 // Получаю случайное число
 var getRandomNumber = function (min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.round(Math.random() * (max - min) + min);
 };
+
 
 // Делаю рокировочку
 var swapElements = function (array, index1, index2) {
@@ -65,6 +68,7 @@ var swapElements = function (array, index1, index2) {
   array[index1] = array[index2];
   array[index2] = temporaryValue;
 };
+
 
 // Перемешиваю массив
 var shuffleArray = function (array) {
@@ -76,6 +80,7 @@ var shuffleArray = function (array) {
   return array;
 };
 
+
 // Создаю болванку для волшебника
 var getWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -86,6 +91,7 @@ var getWizard = function (wizard) {
 
   return wizardElement;
 };
+
 
 // Создаю волшебников
 var createWizards = function () {
@@ -106,6 +112,7 @@ var createWizards = function () {
   return array;
 };
 
+
 // Рисую волшебников
 var renderWizards = function (array) {
   var fragment = document.createDocumentFragment();
@@ -115,6 +122,7 @@ var renderWizards = function (array) {
   }
 
   setupSimilarList.appendChild(fragment);
+  setupSimilar.classList.remove('hidden');
 };
 
 renderWizards(createWizards());
@@ -130,12 +138,6 @@ var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
 
-// Попап закрывается
-var onSetupEscKeydown = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE && setupUserName !== document.activeElement) {
-    closeSetup();
-  }
-};
 
 // Попап открывается
 var openSetup = function () {
@@ -144,11 +146,31 @@ var openSetup = function () {
 };
 
 // Попап закрывается
+var onSetupEscKeydown = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE && setupUserName !== document.activeElement) {
+    closeSetup();
+  }
+};
+
 var closeSetup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onSetupEscKeydown);
 };
 
+
+// Меняю цвет чего-нибудь
+var changeColor = function (feature, colors) {
+  feature.style.fill = colors[getRandomNumber(0, colors.length - 1)];
+};
+
+
+// Меняю цвет фаербола по клику
+var onSetupFireballWrap = function () {
+  setupFireballWrap.style.background = FIREBALL_COLORS[getRandomNumber(0, FIREBALL_COLORS.length - 1)];
+};
+
+
+// Пошли обработчики
 setupOpen.addEventListener('click', function () {
   openSetup();
 });
@@ -157,6 +179,14 @@ setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openSetup();
   }
+});
+
+wizardCoat.addEventListener('click', function () {
+  changeColor(wizardCoat, WIZARDS_COATS_COLORS);
+});
+
+wizardEyes.addEventListener('click', function () {
+  changeColor(wizardEyes, WIZARDS_EYES_COLORS);
 });
 
 setupClose.addEventListener('click', function () {
@@ -168,25 +198,5 @@ setupClose.addEventListener('keydown', function (evt) {
     closeSetup();
   }
 });
-
-// Меняю цвет какой-нибудь штуки
-var changeColor = function (feature, colors) {
-  feature.style.fill = colors[getRandomNumber(0, colors.length - 1)];
-};
-
-// Меняю цвет мантии по клику
-wizardCoat.addEventListener('click', function () {
-  changeColor(wizardCoat, WIZARDS_COATS_COLORS);
-});
-
-// Меняю цвет глаз по клику
-wizardEyes.addEventListener('click', function () {
-  changeColor(wizardEyes, WIZARDS_EYES_COLORS);
-});
-
-// Меняю цвет фаербола по клику
-var onSetupFireballWrap = function () {
-  setupFireballWrap.style.background = FIREBALL_COLORS[getRandomNumber(0, FIREBALL_COLORS.length - 1)];
-};
 
 setupFireballWrap.addEventListener('click', onSetupFireballWrap);

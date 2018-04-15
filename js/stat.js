@@ -23,14 +23,18 @@ var getMaxElem = function (elems) {
 
 // Функция поиска случайного числа
 var getRandomNumber = function (min, max) {
-  return (Math.random() * (max - min) + min);
+  return Math.random() * (max - min) + min;
 };
 
+console.log(getRandomNumber(0.1, 1));
 
 // Функция рандомизации цвета
 var getRandomColor = function (min, max) {
-  return 'rgba(0, 0, 255, ' + getRandomNumber(min, max).toFixed(1) + ')';
+  var alfa = getRandomNumber(min, max).toFixed(1);
+  return 'rgba(0, 0, 255, ' + alfa + ')';
 };
+
+console.log(getRandomColor(0.1, 1));
 
 
 // Функция рисования облачка
