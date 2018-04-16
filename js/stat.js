@@ -26,15 +26,12 @@ var getRandomNumber = function (min, max) {
   return Math.random() * (max - min) + min;
 };
 
-console.log(getRandomNumber(0.1, 1));
 
 // Функция рандомизации цвета
 var getRandomColor = function (min, max) {
   var alfa = getRandomNumber(min, max).toFixed(1);
   return 'rgba(0, 0, 255, ' + alfa + ')';
 };
-
-console.log(getRandomColor(0.1, 1));
 
 
 // Функция рисования облачка

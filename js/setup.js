@@ -57,7 +57,7 @@ var setupSimilar = document.querySelector('.setup-similar');
 
 
 // Получаю случайное число
-var getRandomNumber = function (min, max) {
+var getRandomRoundNumber = function (min, max) {
   return Math.round(Math.random() * (max - min) + min);
 };
 
@@ -160,13 +160,13 @@ var closeSetup = function () {
 
 // Меняю цвет чего-нибудь
 var changeColor = function (feature, colors) {
-  feature.style.fill = colors[getRandomNumber(0, colors.length - 1)];
+  feature.style.fill = colors[getRandomRoundNumber(0, colors.length - 1)];
 };
 
 
 // Меняю цвет фаербола по клику
 var onSetupFireballWrap = function () {
-  setupFireballWrap.style.background = FIREBALL_COLORS[getRandomNumber(0, FIREBALL_COLORS.length - 1)];
+  setupFireballWrap.style.background = FIREBALL_COLORS[getRandomRoundNumber(0, FIREBALL_COLORS.length - 1)];
 };
 
 
