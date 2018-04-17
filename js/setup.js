@@ -73,7 +73,8 @@ var swapElements = function (array, index1, index2) {
 // Перемешиваю массив
 var shuffleArray = function (array) {
   for (var i = 0; i < array.length; i++) {
-    var randomIndex = Math.floor(Math.random() * i);
+    // var randomIndex = Math.floor(Math.random() * i);
+    var randomIndex = getRandomRoundNumber(0, array.length - 1);
     swapElements(array, i, randomIndex);
   }
 
@@ -145,6 +146,7 @@ var openSetup = function () {
   document.addEventListener('keydown', onSetupEscKeydown);
 };
 
+
 // Попап закрывается
 var onSetupEscKeydown = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && setupUserName !== document.activeElement) {
@@ -194,7 +196,7 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+  if (evt.keyCode === ENTER_KEYCODE && setupUserName !== document.activeElement) {
     closeSetup();
   }
 });
